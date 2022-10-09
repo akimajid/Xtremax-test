@@ -36,7 +36,7 @@ const GoogleMapView = () => {
   }, [selected]);
 
   return (
-    <Center ml="405px" position="fixed" h="full" w="full">
+    <Center pl="405px" position="fixed" h="full" w="full">
       <GoogleMap
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
         defaultCenter={center}

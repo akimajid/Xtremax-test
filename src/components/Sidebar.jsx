@@ -8,9 +8,9 @@ import SidebarMenu from "./MenuItem/SidebarMenu";
 
 const AdminSideBar = () => {
   return (
-    <SimpleGrid zIndex="overlay">
+    <SimpleGrid>
       <Navbar />
-      <HStack h="full" position="fixed" boxShadow="md">
+      <HStack zIndex="overlay" h="full" position="fixed" boxShadow="md">
         <SidebarIcon />
         <SidebarMenu/>
       </HStack>

@@ -39,7 +39,7 @@ const CustomMarker = (props) => {
         >
           <h4 className={`${
             selected && selected.place_name === data.place_name
-              ? "text-[20px] font-medium"
+              ? "text-[12px] font-medium"
               : ""
           }`}>{data.place_name}</h4>
           {selected && selected.place_name === data.place_name && (
