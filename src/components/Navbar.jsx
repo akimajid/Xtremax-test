@@ -7,7 +7,7 @@ import {
 
 const NavBarItem = () => {
   return (
-    <Box ml="365px" bgColor="gray.100" px="10" py="10">
+    <Box ml="405px" bgColor="gray.100" px="10" py="10">
       <Flex justifyContent="space-between">
 
         {/* Text section */}

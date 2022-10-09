@@ -16,6 +16,7 @@ const SidebarMenu = () => {
       bg="#2C303B"
       color="white"
       h="full"
+      px="4"
     >
       <Select color="#7C939B" bg="#2C303B" borderColor="#242832" mt="8" p="2">
         <option>Filter by Favorite</option>
