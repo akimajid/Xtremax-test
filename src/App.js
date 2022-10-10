@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import Sidebar from "./components/Sidebar";
 import { SelectedContextProvider } from "./context/selectedContext";
 import GoogleMaps from "./components/Map/GoogleMaps";
+import PlaceDetails from "./components/MenuItem/PlaceDetails"
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Box>
         <Sidebar />
         <GoogleMaps />
+        <PlaceDetails />
       </Box>
     </SelectedContextProvider>
   );
