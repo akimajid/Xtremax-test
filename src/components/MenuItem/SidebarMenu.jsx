@@ -7,8 +7,52 @@ import {
   AccordionPanel,
   Select,
 } from "@chakra-ui/react";
+import React, { useCallback } from "react";
+import { useSelectedContext } from "../../context/selectedContext";
+
+const navMenus = [
+  { label: "Merlion" },
+  {
+    label: "Marina Bay Sands",
+    children: [
+      "ArtScience Museum",
+      "Mariana Bay Sands Skypark",
+      "Double Helix Bridge",
+    ],
+  },
+  {
+    label: "Gardens By The Bay",
+    children: [
+      "ArtScience Museum",
+      "Mariana Bay Sands Skypark",
+      "Double Helix Bridge",
+    ],
+  },
+  {
+    label: "Chinatown",
+    children: [
+      "ArtScience Museum",
+      "Mariana Bay Sands Skypark",
+      "Double Helix Bridge",
+    ],
+  },
+  { label: "Asian Civilisations Museum" },
+  { label: "Clarke Quay" },
+  { label: "Fort Canning Park" },
+  { label: "Singapore Flyer" },
+  { label: "Orchard Road" },
+];
 
 const SidebarMenu = () => {
+  const { setSelectedMenu, selectedMenu } = useSelectedContext();
+
+  const onClick = useCallback(
+    (label) => {
+      setSelectedMenu(label);
+    },
+    [setSelectedMenu]
+  );
+
   return (
     <Box
       overflowY="auto"
@@ -31,296 +75,75 @@ const SidebarMenu = () => {
         <option>Chinatown</option>
       </Select>
 
-      <Accordion
-        px="4"
-        mt="4"
-        border="transparent"
-        allowMultiple
-        lineHeight="6"
-      >
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Merlion</Box>
-            </AccordionButton>
-          </Box>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              justifyContent="space-between"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Marina Bay Sands</Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </Box>
-          <AccordionPanel
+      {navMenus.map((menu) =>
+        menu.children ? (
+          <Accordion
+            key={menu.label}
+            px="4"
+            border="#242832"
             allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
+            lineHeight="6"
           >
-            ArtScience Museum
-          </AccordionPanel>
-          <AccordionPanel
+            <AccordionItem>
+              <Box>
+                <AccordionButton
+                  className={`${
+                    selectedMenu === menu.label
+                      ? "bg-[#1C1F27] text-[#92D72E]"
+                      : ""
+                  } text-left w-full flex justify-between items-center text-white font-medium hover:text-[#92D72E] hover:bg-[#1C1F27] cursor-pointer`}
+                  onClick={() => onClick(menu.label)}
+                >
+                  <Box>{menu.label}</Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </Box>
+              <AccordionPanel
+                allowMultiple
+                lineHeight="3"
+                fontSize="small"
+                _hover={{
+                  cursor: "Pointer",
+                  bgColor: "#1C1F27",
+                  color: "#92D72E",
+                }}
+              >
+                {menu.children.map((child) => (
+                  <dt
+                    key={child}
+                    className="text-sm text-[#7C939B] hover:bg-[#1C1F27] cursor-pointer"
+                  >
+                    {child}
+                  </dt>
+                ))}
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        ) : (
+          <Accordion
+            px="4"
+            border="#242832"
             allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
+            lineHeight="6"
+            key={menu.label}
           >
-            Mariana Bay Sands Skypark
-          </AccordionPanel>
-          <AccordionPanel
-            allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
-          >
-            Double Helix Bridge
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              justifyContent="space-between"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Gardens By The Bay</Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </Box>
-          <AccordionPanel
-            allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
-          >
-            ArtScience Museum
-          </AccordionPanel>
-          <AccordionPanel
-            allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
-          >
-            Mariana Bay Sands Skypark
-          </AccordionPanel>
-          <AccordionPanel
-            allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
-          >
-            Double Helix Bridge
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              justifyContent="space-between"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Chinatown</Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </Box>
-          <AccordionPanel
-            allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
-          >
-            ArtScience Museum
-          </AccordionPanel>
-          <AccordionPanel
-            allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
-          >
-            Mariana Bay Sands Skypark
-          </AccordionPanel>
-          <AccordionPanel
-            allowMultiple
-            lineHeight="3"
-            fontSize="small"
-            _hover={{
-              cursor: "Pointer",
-              bgColor: "#1C1F27",
-              color: "#92D72E",
-            }}
-            px="8"
-          >
-            Double Helix Bridge
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Asian Civilisations Museum</Box>
-            </AccordionButton>
-          </Box>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Clarke Quay</Box>
-            </AccordionButton>
-          </Box>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Fort Canning Park</Box>
-            </AccordionButton>
-          </Box>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Singapore Flyer</Box>
-            </AccordionButton>
-          </Box>
-        </AccordionItem>
-      </Accordion>
-
-      <Accordion px="4" border="transparent" allowMultiple lineHeight="6">
-        <AccordionItem>
-          <Box>
-            <AccordionButton
-              fontSize="sm"
-              fontWeight="bold"
-              _hover={{
-                cursor: "Pointer",
-                bgColor: "#1C1F27",
-                color: "#92D72E",
-              }}
-            >
-              <Box>Orchard Road</Box>
-            </AccordionButton>
-          </Box>
-        </AccordionItem>
-      </Accordion>
+            <AccordionItem>
+              <Box>
+                <AccordionButton
+                  className={`${
+                    selectedMenu === menu.label
+                      ? "bg-[#1C1F27] text-[#92D72E]"
+                      : ""
+                  } text-white font-medium hover:text-[#92D72E] hover:bg-[#1C1F27] cursor-pointer`}
+                  onClick={() => onClick(menu.label)}
+                >
+                  <Box>{menu.label}</Box>
+                </AccordionButton>
+              </Box>
+            </AccordionItem>
+          </Accordion>
+        )
+      )}
     </Box>
   );
 };
